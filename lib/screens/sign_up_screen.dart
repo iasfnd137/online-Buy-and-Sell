@@ -26,17 +26,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
    bool passwordObsecure = true;
 
    bool confirmPasswordObsecure = true;
+   double screenHeight = 0;
+
+   double screenWidth = 0;
+
+   Color primary = Colors.teal;
 
   @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
     body: Column(
       children: [
-        SizedBox(height: 20,),
+        SizedBox(height: 24,),
         Container(
-          height: 300,
+          height: 250,
           width: MediaQuery.of(context).size.width*100,
           decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -44,11 +51,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   end: Alignment.bottomLeft,
                   colors: [
                     Colors.grey,
-                    Colors.black,
+                    primary,
                   ],
                 ),
 
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100),),
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(80),),
             ),
         child: Column(
           children: [
@@ -62,166 +69,255 @@ class _SignUpScreenState extends State<SignUpScreen> {
          padding: const EdgeInsets.only(top: 20.0,right: 40,left: 40),
          child: Column(
            children: [
-             TextField(
-               style: TextStyle(color: Colors.white),
-               cursorColor: Colors.white,
-               controller: nameController,
-               decoration: InputDecoration(
-                   prefixIcon: Icon(Icons.person,color: Colors.white,),
-                   hintText: 'Name',
-                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-                   fillColor: Colors.black.withOpacity(0.4),
-                   filled: true,
-                   focusedBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
+             Container(
+               margin: EdgeInsets.only(bottom: screenHeight / 70),
+               width: screenWidth,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(12)),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black26,
+                     blurRadius: 10,
+                     offset: Offset(2, 2),
                    ),
-                   enabledBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   )
+                 ],
                ),
-             ),
-             SizedBox(height: 10,),
-             TextField(
-               style: TextStyle(color: Colors.white),
-               cursorColor: Colors.white,
-               controller: cnicController,
-               decoration: InputDecoration(
-                   prefixIcon: Icon(Icons.password,color: Colors.white,),
-                   hintText: 'Cnic',
-                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-                   fillColor: Colors.black.withOpacity(0.4),
-                   filled: true,
-                   focusedBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
+               child: Row(
+                 children: [
+                   Container(
+                     width: screenWidth / 6,
+                     child: Icon(
+                       Icons.person,
+                       color: primary,
+                       size: screenWidth / 15,
+                     ),
                    ),
-                   enabledBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   )
-               ),
-             ),
-             SizedBox(height: 10,),
-             TextField(
+                   Expanded(
+                     child: Padding(
+                       padding: EdgeInsets.only(right: screenWidth / 12),
+                       child: TextField(
+                         controller: nameController,
+                         enableSuggestions: false,
+                         autocorrect: false,
+                         decoration: InputDecoration(
+                           contentPadding:
+                           EdgeInsets.symmetric(vertical: screenHeight / 35),
+                           border: InputBorder.none,
+                           hintText: 'enter your name',
+                         ),
+                         maxLines: 1,
 
-               style: TextStyle(color: Colors.white),
-               cursorColor: Colors.white,
-               controller: emailController,
-               decoration: InputDecoration(
-                   prefixIcon: Icon(Icons.email_outlined,color: Colors.white,),
-                   hintText: 'Email',
-                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-                   fillColor: Colors.black.withOpacity(0.4),
-                   filled: true,
-                   focusedBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   ),
-                   enabledBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   )
-               ),
-             ),
-             SizedBox(height: 10,),
-             TextField(
-               style: TextStyle(color: Colors.white),
-               cursorColor: Colors.white,
-               controller: passwordController,
-               obscureText: passwordObsecure,
-               decoration: InputDecoration(
-                   suffixIcon: IconButton(
-                       icon: Icon(passwordObsecure? Icons.visibility_off : Icons.visibility,color: Colors.white.withOpacity(0.7),
                        ),
-                       onPressed: () {
-                         setState(() {
-                           passwordObsecure = !passwordObsecure;
-                         });
-                       }),
-                   prefixIcon: Icon(Icons.lock_outline,color: Colors.white,),
-                   hintText: 'Password',
-                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-                   fillColor: Colors.black.withOpacity(0.4),
-                   filled: true,
-                   focusedBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
+                     ),
                    ),
-                   enabledBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   )
+                 ],
                ),
              ),
-             SizedBox(height: 10,),
-             TextField(
-               style: TextStyle(color: Colors.white),
-               cursorColor: Colors.white,
-               obscureText: confirmPasswordObsecure,
-               controller: confirmPasswordController,
-               decoration: InputDecoration(
-                   suffixIcon: IconButton(
-                     onPressed: (){
-                       setState(() {
-                         //use nor gate
-                         confirmPasswordObsecure = !confirmPasswordObsecure;
-                       });
-                     },
-                     icon: Icon(confirmPasswordObsecure? Icons.visibility_off: Icons.visibility,color: Colors.white.withOpacity(0.7),),
+             Container(
+               margin: EdgeInsets.only(bottom: screenHeight / 70),
+               width: screenWidth,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(12)),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black26,
+                     blurRadius: 10,
+                     offset: Offset(2, 2),
                    ),
-                   prefixIcon: Icon(Icons.lock_outline,color: Colors.white,),
-                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-                   hintText: 'Confirm Password',
-                   fillColor: Colors.black.withOpacity(0.4),
-                   filled: true,
-                   focusedBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
+                 ],
+               ),
+               child: Row(
+                 children: [
+                   Container(
+                     width: screenWidth / 6,
+                     child: Icon(
+                       Icons.textsms_outlined,
+                       color: primary,
+                       size: screenWidth / 15,
+                     ),
                    ),
-                   enabledBorder: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(15),
-                       borderSide: BorderSide(
-                         color: Colors.black,
-                         width: 2,
-                       )
-                   )
+                   Expanded(
+                     child: Padding(
+                       padding: EdgeInsets.only(right: screenWidth / 12),
+                       child: TextField(
+                         controller: cnicController,
+                         enableSuggestions: false,
+                         autocorrect: false,
+                         decoration: InputDecoration(
+                           contentPadding:
+                           EdgeInsets.symmetric(vertical: screenHeight / 35),
+                           border: InputBorder.none,
+                           hintText: 'enter your Cnic',
+                         ),
+                         maxLines: 1,
+
+                       ),
+                     ),
+                   ),
+                 ],
                ),
              ),
-             SizedBox(height: 10,),
+             Container(
+               margin: EdgeInsets.only(bottom: screenHeight / 70),
+               width: screenWidth,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(12)),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black26,
+                     blurRadius: 10,
+                     offset: Offset(2, 2),
+                   ),
+                 ],
+               ),
+               child: Row(
+                 children: [
+                   Container(
+                     width: screenWidth / 6,
+                     child: Icon(
+                       Icons.email_outlined,
+                       color: primary,
+                       size: screenWidth / 15,
+                     ),
+                   ),
+                   Expanded(
+                     child: Padding(
+                       padding: EdgeInsets.only(right: screenWidth / 12),
+                       child: TextField(
+                         controller: emailController,
+                         enableSuggestions: false,
+                         autocorrect: false,
+                         decoration: InputDecoration(
+                           contentPadding:
+                           EdgeInsets.symmetric(vertical: screenHeight / 35),
+                           border: InputBorder.none,
+                           hintText: 'enter your email',
+                         ),
+                         maxLines: 1,
+
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+             Container(
+               margin: EdgeInsets.only(bottom: screenHeight / 70),
+               width: screenWidth,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(12)),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black26,
+                     blurRadius: 10,
+                     offset: Offset(2, 2),
+                   ),
+                 ],
+               ),
+               child: Row(
+                 children: [
+                   Container(
+                     width: screenWidth / 6,
+                     child: Icon(
+                       Icons.lock_outline,
+                       color: primary,
+                       size: screenWidth / 15,
+                     ),
+                   ),
+                   Expanded(
+                     child: Padding(
+                       padding: EdgeInsets.only(right: screenWidth / 12),
+                       child: TextField(
+                         obscureText: passwordObsecure,
+                         controller: passwordController,
+                         enableSuggestions: false,
+                         autocorrect: false,
+                         decoration: InputDecoration(
+                           suffixIcon: IconButton(
+                               icon: Icon(passwordObsecure? Icons.visibility_off : Icons.visibility,color: primary,
+                               ),
+                               onPressed: () {
+                                 setState(() {
+                                   passwordObsecure = !passwordObsecure;
+                                 });
+                               }),
+
+                           contentPadding:
+                           EdgeInsets.symmetric(vertical: screenHeight / 35),
+                           border: InputBorder.none,
+                           hintText: 'enter your Password',
+                         ),
+                         maxLines: 1,
+
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+             Container(
+               margin: EdgeInsets.only(bottom: screenHeight / 70),
+               width: screenWidth,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(12)),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black26,
+                     blurRadius: 10,
+                     offset: Offset(2, 2),
+                   ),
+                 ],
+               ),
+               child: Row(
+                 children: [
+                   Container(
+                     width: screenWidth / 6,
+                     child: Icon(
+                       Icons.lock_outline,
+                       color: primary,
+                       size: screenWidth / 15,
+                     ),
+                   ),
+                   Expanded(
+                     child: Padding(
+                       padding: EdgeInsets.only(right: screenWidth / 12),
+                       child: TextField(
+                         obscureText: confirmPasswordObsecure,
+                         controller: confirmPasswordController,
+                         enableSuggestions: false,
+                         autocorrect: false,
+                         decoration: InputDecoration(
+                           suffixIcon: IconButton(
+                               icon: Icon(passwordObsecure? Icons.visibility_off : Icons.visibility,color: primary,
+                               ),
+                               onPressed: () {
+                                 setState(() {
+                                   passwordObsecure = !passwordObsecure;
+                                 });
+                               }),
+                           contentPadding:
+                           EdgeInsets.symmetric(vertical: screenHeight / 35),
+                           border: InputBorder.none,
+                           hintText: 'Confirm Password',
+                         ),
+                         maxLines: 1,
+
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+             ),
              ElevatedButton(
                  style: ElevatedButton.styleFrom(
-                   side: BorderSide(width: 2,color: Colors.black),
+                   side: BorderSide(width: 2,color: primary),
                      onPrimary: Colors.white,
-                     primary: Colors.grey.withOpacity(0.1),
+                     primary: primary,
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(8),
 
@@ -306,21 +402,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
              ],
          ),
        ),
-
-
-
-
-
-      Spacer(),
+       Spacer(),
        Row(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
-           Text('If You Have Already an Acoount?',style: TextStyle(color: Colors.white),),
+           Text('If You Have Already an Acoount?',style: TextStyle(color: primary),),
            TextButton(onPressed: (){
              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx){
                return SignInScreen();
              }));
-           }, child: Text('Sign In',style: TextStyle(color: Colors.white),))
+           }, child: Text('Sign In',style: TextStyle(color: primary),))
          ],
        )
       ],
